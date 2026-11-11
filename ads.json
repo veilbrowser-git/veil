@@ -1,5 +1,5 @@
 {
-  "issued": 1794420840424,
+  "issued": 1794420881877,
   "ads": [
     {
       "icon": "",
@@ -13,18 +13,7 @@
       "views": 1000,
       "start": 1794420420337,
       "end": 1804788460719
-    },
-    {
-      "icon": "👑",
-      "name": "Veil",
-      "text": "Max AI and every VPN location for $5.99 a month.",
-      "title": "Try Veil Ultra",
-      "url": "https://veilbrowser-git.github.io/veil/",
-      "id": "95a65531fc9c4eda",
-      "views": 100,
-      "start": 1794418381704,
-      "end": 1804787242862
     }
   ],
-  "signature": "5s93mzmv_KXq4-sgrwEXMxriaeWFImKRJjROPSjclm-t-nsYK4NM_ssgsljG_hEyCcB1g7mNRzo-D_w-M8F1Cw"
+  "signature": "6Hyq-aECEUlKwnBnjqfqzAvIBFN4X7veiXz6SOPHqJP9jFxo0izWLfeUZyDgatSQ7t-cKIt5btTJ1IBvStCIBA"
 }
