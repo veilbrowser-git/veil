@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Veil: the private browser with AI built in</title>
+  <link rel="preload" as="image" href="img/veil-wordmark.webp" fetchpriority="high">
   <meta name="description" content="Veil blocks ads and trackers, searches privately, and has Aegis 3.5, an AI assistant that runs entirely on your Mac. Free download for Mac.">
   <meta property="og:title" content="Veil: the private browser with AI built in">
   <meta property="og:description" content="Ad blocking, private search and an on-device AI assistant. Free for Mac.">
@@ -12,6 +13,7 @@
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <style>
+    img { height: auto; }
     :root {
       --bg: #08090d; --bg2: #0e1016; --card: rgba(255,255,255,.035); --line: rgba(255,255,255,.09); --line2: rgba(255,255,255,.16);
       --text: #f2f3f7; --text2: #b9bdcc; --muted: #80869a;
@@ -155,14 +157,14 @@
 <body>
   <nav>
     <div class="wrap">
-      <a class="logo" href="#top"><img src="img/veil-mark.png" alt="">Veil</a>
+      <a class="logo" href="#top"><img src="img/veil-mark.webp" width="26" height="30" alt="">Veil</a>
       <div class="links"><a href="#features">Features</a><a href="#ai">Aegis AI</a><a href="#search">Search</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
       <a class="btn primary dl-link" href="#download">Download</a>
     </div>
   </nav>
 
   <header class="hero wrap" id="top">
-    <img class="wordmark" src="img/veil-wordmark.png" alt="Veil">
+    <img class="wordmark" src="img/veil-wordmark.webp" width="900" height="274" alt="Veil" fetchpriority="high">
     <h1>Browse privately.<br><span class="grad-text">With AI that never leaves your Mac.</span></h1>
     <p class="lead">Veil blocks ads and trackers, shows you the top search results without the clutter, and comes with Aegis 3.5, an AI assistant that runs entirely on your own computer.</p>
     <div class="cta">
@@ -175,8 +177,8 @@
     <div class="meta" id="hero-meta">Free · Mac, Windows 11, Linux and Android</div>
 
     <div class="window reveal">
-      <div class="bar"><div class="dots"><i></i><i></i><i></i></div><div class="tab"><img src="img/veil-mark.png" alt="">how to make mac and cheese</div><div class="addr">how to make mac and cheese</div><div class="pills"><span class="sh">🛡 On</span><span class="ai">✦ AI</span></div></div>
-      <img src="img/shot-search.jpg" alt="Veil showing search results with the Aegis AI side panel open">
+      <div class="bar"><div class="dots"><i></i><i></i><i></i></div><div class="tab"><img src="img/veil-mark.webp" width="26" height="30" alt="">how to make mac and cheese</div><div class="addr">how to make mac and cheese</div><div class="pills"><span class="sh">🛡 On</span><span class="ai">✦ AI</span></div></div>
+      <img src="img/shot-search.webp" width="1200" height="706" loading="lazy" decoding="async" alt="Veil showing search results with the Aegis AI side panel open">
     </div>
   </header>
 
@@ -211,7 +213,7 @@
         <div class="levels"><span>Low</span><span class="on">Medium</span><span>High</span><span>Extra</span><span>Max</span></div>
         <p class="note" style="margin-top:10px">Pick how hard Aegis thinks: Low for quick answers, Max for the most thorough ones.</p>
       </div>
-      <div class="shot reveal"><img src="img/shot-image.jpg" alt="Aegis creating an image of a snowy cabin in the Veil side panel"></div>
+      <div class="shot reveal"><img src="img/shot-image.webp" width="1200" height="706" loading="lazy" decoding="async" alt="Aegis creating an image of a snowy cabin in the Veil side panel"></div>
     </div>
   </section>
 
@@ -227,7 +229,7 @@
           <li><span><b>Your choice</b> of results from Google or Bing, or switch to DuckDuckGo.</span></li>
         </ul>
       </div>
-      <div class="shot reveal"><img src="img/shot-home.jpg" alt="The Veil new tab page with privacy stats"></div>
+      <div class="shot reveal"><img src="img/shot-home.webp" width="1200" height="706" loading="lazy" decoding="async" alt="The Veil new tab page with privacy stats"></div>
     </div>
   </section>
 
@@ -251,14 +253,14 @@
 
   <section id="download" class="wrap">
     <div class="download reveal">
-      <img class="icon" src="img/veil-icon.png" alt="Veil app icon">
+      <img class="icon" src="img/veil-icon.webp" width="360" height="360" loading="lazy" decoding="async" alt="Veil app icon">
       <h2>Get Veil</h2>
       <p class="sub" style="margin:0 auto 30px">Free. No account needed. Aegis downloads its AI the first time you open it.</p>
       <div class="platforms" id="platforms">
-        <a class="plat" data-os="mac" href="downloads/Veil-1.1.0-mac-arm64.dmg" download><b>macOS</b><span>Apple Silicon (M1 or newer) · macOS 12+</span><em>.dmg · <span class="sz" data-f="mac"></span></em></a>
-        <a class="plat" data-os="win" href="downloads/Veil-1.1.0-win-x64.zip" download><b>Windows 11</b><span>64-bit (x64) · Windows 10/11</span><em>.zip · <span class="sz" data-f="win"></span></em></a>
-        <a class="plat" data-os="linux" href="downloads/Veil-1.1.0-linux-x64.tar.gz" download><b>Linux</b><span>64-bit (x64) · Ubuntu 24.04+, Fedora 40+</span><em>.tar.gz · <span class="sz" data-f="linux"></span></em></a>
-        <a class="plat" data-os="android" href="downloads/Veil-1.1.0-android.apk" download><b>Android</b><span>Android 10+ · 64-bit phones</span><em>.apk · <span class="sz" data-f="android"></span></em></a>
+        <a class="plat" data-os="mac" href="downloads/Veil-1.2.1-mac-arm64.dmg" download><b>macOS</b><span>Apple Silicon (M1 or newer) · macOS 12+</span><em>.dmg · <span class="sz" data-f="mac"></span></em></a>
+        <a class="plat" data-os="win" href="downloads/Veil-1.2.1-win-x64.zip" download><b>Windows 11</b><span>64-bit (x64) · Windows 10/11</span><em>.zip · <span class="sz" data-f="win"></span></em></a>
+        <a class="plat" data-os="linux" href="downloads/Veil-1.2.1-linux-x64.tar.gz" download><b>Linux</b><span>64-bit (x64) · Ubuntu 24.04+, Fedora 40+</span><em>.tar.gz · <span class="sz" data-f="linux"></span></em></a>
+        <a class="plat" data-os="android" href="downloads/Veil-1.2.1-android.apk" download><b>Android</b><span>Android 10+ · 64-bit phones</span><em>.apk · <span class="sz" data-f="android"></span></em></a>
       </div>
       <div class="steps" id="steps"></div>
       <p class="note">Veil isn't in the app stores yet, which is why your device asks you to confirm the first time.</p>
@@ -282,7 +284,7 @@
 
   <footer>
     <div class="wrap">
-      <div class="logo"><img src="img/veil-mark.png" alt="">Veil</div>
+      <div class="logo"><img src="img/veil-mark.webp" width="26" height="30" alt="">Veil</div>
       <div>Built on Chromium. Aegis 3.5 is built on the open-source Qwen3 model; images by Z-Image-Turbo (Apache-2.0).</div>
       <div>© <span id="yr"></span> Veil</div>
     </div>
@@ -291,15 +293,15 @@
   <script>
     // Download files + sizes. Change the URLs if you host the files somewhere else (e.g. GitHub Releases).
     const DOWNLOADS = {
-      mac: { url: 'https://github.com/veilbrowser-git/veil/releases/latest/download/Veil-1.1.0-mac-arm64.dmg', size: '205 MB', label: 'Download for Mac' },
-      win: { url: 'https://github.com/veilbrowser-git/veil/releases/latest/download/Veil-1.1.0-win-x64.zip', size: '283 MB', label: 'Download for Windows' },
-      linux: { url: 'https://github.com/veilbrowser-git/veil/releases/latest/download/Veil-1.1.0-linux-x64.tar.gz', size: '267 MB', label: 'Download for Linux' },
-      android: { url: 'https://github.com/veilbrowser-git/veil/releases/latest/download/Veil-1.1.0-android.apk', size: '9.3 MB', label: 'Download for Android' },
+      mac: { url: 'https://github.com/veilbrowser-git/veil/releases/latest/download/Veil-1.2.1-mac-arm64.dmg', size: '202 MB', label: 'Download for Mac' },
+      win: { url: 'https://github.com/veilbrowser-git/veil/releases/latest/download/Veil-1.2.1-win-x64.zip', size: '283 MB', label: 'Download for Windows' },
+      linux: { url: 'https://github.com/veilbrowser-git/veil/releases/latest/download/Veil-1.2.1-linux-x64.tar.gz', size: '267 MB', label: 'Download for Linux' },
+      android: { url: 'https://github.com/veilbrowser-git/veil/releases/latest/download/Veil-1.2.1-android.apk', size: '9.3 MB', label: 'Download for Android' },
     };
     const STEPS = {
       mac: [['Open the download', 'Double-click the .dmg and drag Veil into Applications.'], ['Allow it once', 'If macOS can\u2019t check it: System Settings → Privacy & Security → Open Anyway.'], ['Meet Aegis', 'Click AI in the toolbar (⌘J) and download Aegis once (2.5 GB).']],
       win: [['Unzip it', 'Right-click the .zip → Extract All, then open the Veil folder.'], ['Double-click “Install Veil”', 'It adds Veil to your Start menu and desktop. If Windows protects your PC: More info → Run anyway.'], ['Meet Aegis', 'Click AI in the toolbar (Ctrl+J) and download Aegis once (2.5 GB).']],
-      linux: [['Unpack it', 'tar -xzf Veil-1.1.0-linux-x64.tar.gz'], ['Install', 'cd Veil-1.1.0-linux-x64 && ./install.sh (adds Veil to your app menu).'], ['Meet Aegis', 'Click AI in the toolbar (Ctrl+J) and download Aegis once (2.5 GB).']],
+      linux: [['Unpack it', 'tar -xzf Veil-1.2.1-linux-x64.tar.gz'], ['Install', 'cd Veil-1.2.1-linux-x64 && ./install.sh (adds Veil to your app menu).'], ['Meet Aegis', 'Click AI in the toolbar (Ctrl+J) and download Aegis once (2.5 GB).']],
       android: [['Download the .apk', 'Open this page on your Android phone and tap Download.'], ['Install', 'Tap the file; if asked, allow your browser to install apps.'], ['Meet Aegis', 'Tap ✦ Aegis and download it once (1.1 GB, Wi-Fi recommended).']],
     };
     const ua = navigator.userAgent;
