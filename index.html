@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Veil: the private browser with AI built in</title>
+  <meta name="description" content="Veil blocks ads and trackers, searches privately, and has Aegis 3.5, an AI assistant that runs entirely on your Mac. Free download for Mac.">
+  <meta property="og:title" content="Veil: the private browser with AI built in">
+  <meta property="og:description" content="Ad blocking, private search and an on-device AI assistant. Free for Mac.">
+  <meta property="og:image" content="img/shot-search.jpg">
+  <meta name="theme-color" content="#08090d">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <style>
+    :root {
+      --bg: #08090d; --bg2: #0e1016; --card: rgba(255,255,255,.035); --line: rgba(255,255,255,.09); --line2: rgba(255,255,255,.16);
+      --text: #f2f3f7; --text2: #b9bdcc; --muted: #80869a;
+      --grad: linear-gradient(120deg, #3cf2c0, #4aa8ff 50%, #8b6cff);
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Inter, Roboto, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+    .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+    /* nav */
+    nav { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px); background: rgba(8,9,13,.72); border-bottom: 1px solid var(--line); }
+    nav .wrap { display: flex; align-items: center; gap: 28px; height: 68px; }
+    nav .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 20px; letter-spacing: -.02em; }
+    nav .logo img { width: 26px; }
+    nav .links { display: flex; gap: 26px; margin-left: auto; font-size: 15px; }
+    nav .links a { text-decoration: none; color: var(--text2); }
+    nav .links a:hover { color: var(--text); }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; border-radius: 14px; font-weight: 700; font-size: 16px; text-decoration: none; border: 1px solid var(--line2); background: rgba(255,255,255,.05); transition: transform .15s, background .15s, box-shadow .15s; cursor: pointer; }
+    .btn:hover { background: rgba(255,255,255,.1); transform: translateY(-1px); }
+    .btn.primary { background: #fff; color: #08090d; border-color: #fff; box-shadow: 0 10px 40px rgba(255,255,255,.12); }
+    .btn.primary:hover { box-shadow: 0 14px 50px rgba(255,255,255,.2); }
+    .btn svg { width: 18px; height: 18px; }
+    nav .btn { padding: 8px 16px; font-size: 14px; border-radius: 11px; }
+    @media (max-width: 760px) { nav .links { display: none; } nav .btn { margin-left: auto; } }
+
+    /* hero */
+    .hero { position: relative; text-align: center; padding: 96px 0 40px; }
+    .hero::before { content: ""; position: absolute; inset: -200px -20% auto; height: 700px; background: radial-gradient(600px 300px at 30% 30%, rgba(60,242,192,.13), transparent 70%), radial-gradient(600px 320px at 70% 20%, rgba(139,108,255,.16), transparent 70%); pointer-events: none; z-index: -1; }
+    .hero .wordmark { width: min(520px, 80vw); margin: 0 auto 26px; filter: drop-shadow(0 20px 60px rgba(255,255,255,.08)); }
+    .hero h1 { font-size: clamp(34px, 5.4vw, 60px); line-height: 1.08; letter-spacing: -.035em; margin: 0 auto 18px; max-width: 900px; font-weight: 800; }
+    .hero p.lead { font-size: clamp(17px, 2vw, 21px); color: var(--text2); max-width: 680px; margin: 0 auto 34px; }
+    .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .cta .btn.primary { padding: 16px 28px; font-size: 17px; }
+    .meta { margin-top: 14px; color: var(--muted); font-size: 14px; }
+
+    /* window frame around screenshots */
+    .window { margin: 60px auto 0; max-width: 1120px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line2); background: #0c0e16; box-shadow: 0 40px 120px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.03); }
+    .window .bar { display: flex; align-items: center; gap: 14px; height: 44px; padding: 0 14px; background: #0a0b11; border-bottom: 1px solid var(--line); }
+    .window .dots { display: flex; gap: 7px; }
+    .window .dots i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; }
+    .window .dots i:nth-child(2) { background: #febc2e; } .window .dots i:nth-child(3) { background: #28c840; }
+    .window .tab { display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px; margin-top: 12px; border-radius: 10px 10px 0 0; background: #0f121b; font-size: 13px; color: var(--text2); max-width: 260px; white-space: nowrap; overflow: hidden; }
+    .window .tab img { width: 14px; }
+    .window .addr { flex: 1; height: 28px; border-radius: 9px; background: #07080c; border: 1px solid var(--line); font-size: 13px; color: var(--muted); display: flex; align-items: center; padding: 0 12px; overflow: hidden; white-space: nowrap; }
+    .window .pills { display: flex; gap: 6px; }
+    .window .pills span { font-size: 12px; font-weight: 700; padding: 4px 9px; border-radius: 8px; }
+    .window .pills .sh { color: #3cf2c0; background: rgba(60,242,192,.12); }
+    .window .pills .ai { color: #0b0d14; background: var(--grad); }
+    @media (max-width: 760px) { .window .addr, .window .pills { display: none; } }
+
+    /* sections */
+    section { padding: 110px 0 0; }
+    .kicker { font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    h2 { font-size: clamp(30px, 4vw, 46px); letter-spacing: -.03em; line-height: 1.1; margin: 0 0 16px; font-weight: 800; }
+    .sub { color: var(--text2); font-size: 19px; max-width: 700px; margin: 0 0 44px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 960px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 620px) { .grid { grid-template-columns: 1fr; } }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 26px; transition: border-color .2s, transform .2s; }
+    .card:hover { border-color: var(--line2); transform: translateY(-2px); }
+    .card .ic { width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; background: rgba(255,255,255,.06); border: 1px solid var(--line); margin-bottom: 16px; font-size: 21px; }
+    .card h3 { margin: 0 0 8px; font-size: 19px; letter-spacing: -.01em; }
+    .card p { margin: 0; color: var(--text2); font-size: 15.5px; }
+    .pro { font-size: 11px; font-weight: 800; letter-spacing: .04em; padding: 2px 7px; border-radius: 6px; background: var(--grad); color: #08090d; vertical-align: 2px; margin-left: 4px; }
+
+    .split { display: grid; grid-template-columns: 1fr 1.25fr; gap: 56px; align-items: center; }
+    .split.rev { grid-template-columns: 1.25fr 1fr; }
+    .split.rev .text { order: 2; }
+    @media (max-width: 960px) { .split, .split.rev { grid-template-columns: 1fr; } .split.rev .text { order: 0; } }
+    .split ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+    .split li { display: flex; gap: 12px; color: var(--text2); }
+    .split li b { color: var(--text); }
+    .split li::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: 10px; border-radius: 50%; background: var(--grad); }
+    .shot { border-radius: 16px; overflow: hidden; border: 1px solid var(--line2); box-shadow: 0 30px 90px rgba(0,0,0,.55); }
+    .levels { display: inline-flex; gap: 4px; padding: 4px; border-radius: 12px; border: 1px solid var(--line); background: rgba(255,255,255,.03); margin-top: 22px; flex-wrap: wrap; }
+    .levels span { font-size: 13px; font-weight: 700; padding: 6px 12px; border-radius: 9px; color: var(--muted); }
+    .levels span.on { background: var(--grad); color: #0b0d14; }
+
+    /* download */
+    .download { margin-top: 110px; padding: 64px 40px; border-radius: 28px; text-align: center; background: radial-gradient(500px 220px at 20% 0%, rgba(60,242,192,.12), transparent 70%), radial-gradient(500px 240px at 80% 0%, rgba(139,108,255,.16), transparent 70%), var(--bg2); border: 1px solid var(--line2); }
+    .download img.icon { width: 110px; margin: 0 auto 20px; filter: drop-shadow(0 16px 40px rgba(0,0,0,.6)); }
+    .reqs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 26px 0 0; }
+    .reqs span { font-size: 13.5px; color: var(--text2); padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.03); }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 40px; text-align: left; }
+    @media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+    .step { padding: 20px; border-radius: 16px; background: rgba(0,0,0,.25); border: 1px solid var(--line); }
+    .step > b { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .step p b { color: var(--text); }
+    .step > b i { font-style: normal; width: 26px; height: 26px; border-radius: 8px; background: #fff; color: #08090d; display: grid; place-items: center; font-size: 14px; }
+    .step p { margin: 0; color: var(--text2); font-size: 15px; }
+    .note { margin-top: 18px; color: var(--muted); font-size: 14px; }
+
+    /* pricing */
+    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 900px) { .plans { grid-template-columns: 1fr; } }
+    .plan { position: relative; padding: 28px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 14px; }
+    .plan.featured { border-color: rgba(139,108,255,.55); box-shadow: 0 20px 60px rgba(74,168,255,.12); }
+    .plan .badge { position: absolute; top: -12px; right: 20px; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 999px; background: var(--grad); color: #08090d; }
+    .plan h3 { margin: 0; font-size: 20px; }
+    .plan .price { font-size: 38px; font-weight: 800; letter-spacing: -.03em; }
+    .plan .price small { font-size: 15px; font-weight: 600; color: var(--muted); }
+    .plan ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; color: var(--text2); flex: 1; align-content: start; }
+    .plan li::before { content: "✓  "; color: #3cf2c0; font-weight: 800; }
+    .plan .btn { justify-content: center; }
+    .plan .btn[disabled] { opacity: .65; cursor: default; transform: none; }
+    /* platforms */
+    .platforms { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; text-align: left; }
+    @media (max-width: 960px) { .platforms { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .platforms { grid-template-columns: 1fr; } }
+    .plat { display: flex; flex-direction: column; gap: 4px; padding: 18px; border-radius: 16px; text-decoration: none; background: rgba(0,0,0,.25); border: 1px solid var(--line2); transition: transform .15s, border-color .15s, background .15s; }
+    .plat:hover { transform: translateY(-2px); border-color: #fff; }
+    .plat.mine { background: #fff; color: #08090d; border-color: #fff; }
+    .plat.mine span, .plat.mine em { color: #3a3f4f; }
+    .plat b { font-size: 18px; }
+    .plat span { font-size: 13px; color: var(--text2); }
+    .plat em { font-style: normal; font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+    /* faq */
+    .faq { max-width: 820px; }
+    details { border-bottom: 1px solid var(--line); padding: 18px 0; }
+    summary { cursor: pointer; font-weight: 700; font-size: 18px; list-style: none; display: flex; justify-content: space-between; gap: 20px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--muted); font-weight: 400; font-size: 24px; line-height: 1; transition: transform .2s; }
+    details[open] summary::after { transform: rotate(45deg); }
+    details p { color: var(--text2); margin: 12px 0 0; }
+
+    footer { margin-top: 110px; border-top: 1px solid var(--line); padding: 34px 0 50px; color: var(--muted); font-size: 14px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: center; }
+    footer .logo { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 800; }
+    footer .logo img { width: 22px; }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap">
+      <a class="logo" href="#top"><img src="img/veil-mark.png" alt="">Veil</a>
+      <div class="links"><a href="#features">Features</a><a href="#ai">Aegis AI</a><a href="#search">Search</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
+      <a class="btn primary dl-link" href="#download">Download</a>
+    </div>
+  </nav>
+
+  <header class="hero wrap" id="top">
+    <img class="wordmark" src="img/veil-wordmark.png" alt="Veil">
+    <h1>Browse privately.<br><span class="grad-text">With AI that never leaves your Mac.</span></h1>
+    <p class="lead">Veil blocks ads and trackers, shows you the top search results without the clutter, and comes with Aegis 3.5, an AI assistant that runs entirely on your own computer.</p>
+    <div class="cta">
+      <a class="btn primary" id="hero-dl" href="#download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+        <span id="hero-dl-label">Download Veil</span>
+      </a>
+      <a class="btn" href="#features">See what's inside</a>
+    </div>
+    <div class="meta" id="hero-meta">Free · Mac, Windows 11, Linux and Android</div>
+
+    <div class="window reveal">
+      <div class="bar"><div class="dots"><i></i><i></i><i></i></div><div class="tab"><img src="img/veil-mark.png" alt="">how to make mac and cheese</div><div class="addr">how to make mac and cheese</div><div class="pills"><span class="sh">🛡 On</span><span class="ai">✦ AI</span></div></div>
+      <img src="img/shot-search.jpg" alt="Veil showing search results with the Aegis AI side panel open">
+    </div>
+  </header>
+
+  <section id="features" class="wrap">
+    <div class="kicker">Features</div>
+    <h2>Everything you need. Nothing watching you.</h2>
+    <p class="sub">Veil is built on Chromium, so your favorite sites just work. It's faster and quieter because the junk never loads.</p>
+    <div class="grid">
+      <div class="card reveal"><div class="ic">🛡</div><h3>Shields</h3><p>Blocks ads and trackers on every site, upgrades connections to HTTPS, strips tracking codes from links and sends "do not track" signals.</p></div>
+      <div class="card reveal"><div class="ic">✦</div><h3>Aegis 3.5 AI</h3><p>A built-in assistant in the side panel. Summarize pages, ask questions, get cited answers. It runs on your Mac, with no account and no API keys.</p></div>
+      <div class="card reveal"><div class="ic">🔍</div><h3>Veil Search</h3><p>The top web results, images, videos and news in one clean page, with ads and trackers inside the results still blocked.</p></div>
+      <div class="card reveal"><div class="ic">🎨</div><h3>Create images</h3><p>Ask Aegis to "draw a cozy cabin in the snow" and it creates the picture right on your computer.</p></div>
+      <div class="card reveal"><div class="ic">▶</div><h3>Pull it up</h3><p>"Find a TikTok about pasta" or "play lofi on Spotify." Aegis opens exactly what you asked for on the site you named.</p></div>
+      <div class="card reveal"><div class="ic">🔒</div><h3>Veil VPN <span class="pro">Free</span></h3><p>Hide your IP address and location and encrypt your browsing on any Wi-Fi, with a kill switch that stops leaks. Free on every plan; Pro and Ultra get faster servers.</p></div>
+      <div class="card reveal"><div class="ic">🔑</div><h3>Veil Pass</h3><p>A built-in password manager, end-to-end encrypted on your device. Saves logins, fills them only on the right site, and generates strong passwords.</p></div>
+      <div class="card reveal"><div class="ic">🕶</div><h3>Private windows</h3><p>Private windows keep nothing: history, cookies and logins vanish the moment you close them.</p></div>
+    </div>
+  </section>
+
+  <section id="ai" class="wrap">
+    <div class="split">
+      <div class="text reveal">
+        <div class="kicker">Aegis 3.5</div>
+        <h2>An AI assistant that's actually private.</h2>
+        <p class="sub" style="margin-bottom:26px">Most AI assistants send everything you type to a server. Aegis runs on your own device, so your questions, the pages you read and the files you share stay with you.</p>
+        <ul>
+          <li><span><b>Reads the page you're on:</b> summaries, key takeaways, simple explanations, fact-checks.</span></li>
+          <li><span><b>Searches the web</b> and answers with numbered, clickable sources.</span></li>
+          <li><span><b>Understands your files:</b> drop in photos, screenshots, PDFs or documents.</span></li>
+          <li><span><b>Safe by design:</b> refuses harmful requests and responds to anyone struggling with real crisis resources.</span></li>
+        </ul>
+        <div class="levels"><span>Low</span><span class="on">Medium</span><span>High</span><span>Extra</span><span>Max</span></div>
+        <p class="note" style="margin-top:10px">Pick how hard Aegis thinks: Low for quick answers, Max for the most thorough ones.</p>
+      </div>
+      <div class="shot reveal"><img src="img/shot-image.jpg" alt="Aegis creating an image of a snowy cabin in the Veil side panel"></div>
+    </div>
+  </section>
+
+  <section id="search" class="wrap">
+    <div class="split rev">
+      <div class="text reveal">
+        <div class="kicker">Veil Search</div>
+        <h2>The results you want, without the clutter.</h2>
+        <p class="sub" style="margin-bottom:26px">Type anything in the address bar. Veil Search shows the top results from the web, with tabs for images, videos and news, and the trackers inside the results are still blocked.</p>
+        <ul>
+          <li><span><b>No AI summaries</b> pushed above your results. Just the links.</span></li>
+          <li><span><b>Wiki tab</b> for quick encyclopedia answers with a picture card.</span></li>
+          <li><span><b>Your choice</b> of results from Google or Bing, or switch to DuckDuckGo.</span></li>
+        </ul>
+      </div>
+      <div class="shot reveal"><img src="img/shot-home.jpg" alt="The Veil new tab page with privacy stats"></div>
+    </div>
+  </section>
+
+  <section id="pricing" class="wrap">
+    <div class="kicker">Pricing</div>
+    <h2>Free forever. Upgrade when you want more.</h2>
+    <p class="sub">Everything you need to browse privately is free, VPN included. Pro and Ultra add deeper AI and a faster VPN.</p>
+    <div class="plans">
+      <div class="plan reveal"><h3>Free</h3><div class="price">$0<small> forever</small></div>
+        <ul><li>Ad &amp; tracker blocking</li><li>Veil VPN on the Tor network (slower)</li><li>Veil Pass password manager</li><li>Aegis AI: Low, Medium, High</li><li>Veil Search &amp; image creation</li></ul>
+        <a class="btn" href="#download">Download free</a></div>
+      <div class="plan featured reveal"><div class="badge">Most popular</div><h3>Pro</h3><div class="price">$2.99<small> / month</small></div>
+        <ul><li>Everything in Free</li><li>Aegis AI: <b>Extra</b> effort</li><li><b>Fast</b> VPN with Cloudflare WARP</li></ul>
+        <button class="btn primary" disabled>Coming soon</button></div>
+      <div class="plan reveal"><h3>Ultra</h3><div class="price">$5.99<small> / month</small></div>
+        <ul><li>Everything in Pro</li><li>Aegis AI: <b>Max</b> effort</li><li><b>Every</b> VPN location</li><li>First access to new features</li></ul>
+        <button class="btn primary" disabled>Coming soon</button></div>
+    </div>
+    <p class="note">Paid plans open soon. Already have a license key? Paste it in Veil → Settings → Your plan.</p>
+  </section>
+
+  <section id="download" class="wrap">
+    <div class="download reveal">
+      <img class="icon" src="img/veil-icon.png" alt="Veil app icon">
+      <h2>Get Veil</h2>
+      <p class="sub" style="margin:0 auto 30px">Free. No account needed. Aegis downloads its AI the first time you open it.</p>
+      <div class="platforms" id="platforms">
+        <a class="plat" data-os="mac" href="downloads/Veil-1.0.0-mac-arm64.dmg" download><b>macOS</b><span>Apple Silicon (M1 or newer) · macOS 12+</span><em>.dmg · <span class="sz" data-f="mac"></span></em></a>
+        <a class="plat" data-os="win" href="downloads/Veil-1.0.0-win-x64.zip" download><b>Windows 11</b><span>64-bit (x64) · Windows 10/11</span><em>.zip · <span class="sz" data-f="win"></span></em></a>
+        <a class="plat" data-os="linux" href="downloads/Veil-1.0.0-linux-x64.tar.gz" download><b>Linux</b><span>64-bit (x64) · Ubuntu 24.04+, Fedora 40+</span><em>.tar.gz · <span class="sz" data-f="linux"></span></em></a>
+        <a class="plat" data-os="android" href="downloads/Veil-1.0.0-android.apk" download><b>Android</b><span>Android 10+ · 64-bit phones</span><em>.apk · <span class="sz" data-f="android"></span></em></a>
+      </div>
+      <div class="steps" id="steps"></div>
+      <p class="note">Veil isn't in the app stores yet, which is why your device asks you to confirm the first time.</p>
+    </div>
+  </section>
+
+  <section id="faq" class="wrap">
+    <div class="kicker">FAQ</div>
+    <h2>Questions</h2>
+    <div class="faq">
+      <details><summary>Is Veil free?</summary><p>Yes. Veil, the VPN (on the Tor network), Veil Pass, Aegis and the image creator are free, with no account. Pro ($2.99/mo) and Ultra ($5.99/mo) add deeper AI and a faster VPN.</p></details>
+      <details><summary>Does Aegis send my data anywhere?</summary><p>No. Aegis runs on your Mac. Your questions, the pages it reads and the files you give it never leave your computer. When web search is on, it looks up your question on a public encyclopedia to find sources, the same as you visiting it.</p></details>
+      <details><summary>Do I need an API key or an AI subscription?</summary><p>No. Aegis downloads its model once (about 2.5 GB on computers, 1.1 GB on Android) and then runs offline. The optional image creator is a one-time 4.2 GB download.</p></details>
+      <details><summary>Which devices does Veil run on?</summary><p>Macs with Apple Silicon (M1 or newer), Windows 10 and 11 (64-bit), Linux (64-bit) and Android 10+ phones. Intel Macs and iPhone aren't supported yet. Aegis runs best on computers with 8 GB of memory or more; on Android it uses a smaller model sized for phones.</p></details>
+      <details><summary>How does the Veil VPN work?</summary><p>Everything you browse in Veil goes through an encrypted connection (the Tor network, Cloudflare WARP, or a Veil server), hiding your IP address and location from the sites you visit and from the Wi-Fi network you're on. If the connection drops, Veil stops loading pages instead of leaking. It protects browsing in Veil, not other apps. The VPN is free on every plan through the Tor network, with no account (it's slower than a paid server); Pro and Ultra add a fast location through Cloudflare WARP (install Cloudflare's free 1.1.1.1 app once), and Ultra adds every location. It's on Mac, Windows and Linux; Android support is coming.</p></details>
+      <details><summary>Is Veil Pass safe?</summary><p>Your passwords are encrypted on your device with your master password and never sent anywhere. Veil only fills a password on the exact website it was saved for. Because nobody else has your master password, it can't be recovered if you forget it.</p></details>
+      <details><summary>Is Veil a Chrome extension?</summary><p>No. Veil is a full browser built on the same engine as Chrome (Chromium), so websites work the way you expect. Download it here for Mac, Windows, Linux or Android and open it like any other app.</p></details>
+      <details><summary>Why does my device warn me the first time I open Veil?</summary><p>Veil isn't in the App Store, Microsoft Store or Play Store yet, so your device asks you to confirm. On Mac: System Settings → Privacy &amp; Security → Open Anyway. On Windows: "More info" → "Run anyway". On Android: allow installing apps from your browser when asked.</p></details>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="logo"><img src="img/veil-mark.png" alt="">Veil</div>
+      <div>Built on Chromium. Aegis 3.5 is built on the open-source Qwen3 model; images by Z-Image-Turbo (Apache-2.0).</div>
+      <div>© <span id="yr"></span> Veil</div>
+    </div>
+  </footer>
+
+  <script>
+    // Download files + sizes. Change the URLs if you host the files somewhere else (e.g. GitHub Releases).
+    const DOWNLOADS = {
+      mac: { url: 'https://github.com/veilbrowser-git/veil/releases/latest/download/Veil-1.0.0-mac-arm64.dmg', size: '204 MB', label: 'Download for Mac' },
+      win: { url: 'https://github.com/veilbrowser-git/veil/releases/latest/download/Veil-1.0.0-win-x64.zip', size: '283 MB', label: 'Download for Windows' },
+      linux: { url: 'https://github.com/veilbrowser-git/veil/releases/latest/download/Veil-1.0.0-linux-x64.tar.gz', size: '267 MB', label: 'Download for Linux' },
+      android: { url: 'https://github.com/veilbrowser-git/veil/releases/latest/download/Veil-1.0.0-android.apk', size: '9.3 MB', label: 'Download for Android' },
+    };
+    const STEPS = {
+      mac: [['Open the download', 'Double-click the .dmg and drag Veil into Applications.'], ['Allow it once', 'If macOS can\u2019t check it: System Settings → Privacy & Security → Open Anyway.'], ['Meet Aegis', 'Click AI in the toolbar (⌘J) and download Aegis once (2.5 GB).']],
+      win: [['Unzip it', 'Right-click the .zip → Extract All, then open the Veil folder.'], ['Run Veil.exe', 'If Windows protects your PC: More info → Run anyway.'], ['Meet Aegis', 'Click AI in the toolbar (Ctrl+J) and download Aegis once (2.5 GB).']],
+      linux: [['Unpack it', 'tar -xzf Veil-1.0.0-linux-x64.tar.gz'], ['Install', 'cd Veil-1.0.0-linux-x64 && ./install.sh (adds Veil to your app menu).'], ['Meet Aegis', 'Click AI in the toolbar (Ctrl+J) and download Aegis once (2.5 GB).']],
+      android: [['Download the .apk', 'Open this page on your Android phone and tap Download.'], ['Install', 'Tap the file; if asked, allow your browser to install apps.'], ['Meet Aegis', 'Tap ✦ Aegis and download it once (1.1 GB, Wi-Fi recommended).']],
+    };
+    const ua = navigator.userAgent;
+    const os = /Android/i.test(ua) ? 'android' : /Windows/i.test(ua) ? 'win' : /Mac OS X|Macintosh/i.test(ua) && !/iPhone|iPad/i.test(ua) ? 'mac' : /Linux|X11/i.test(ua) ? 'linux' : 'mac';
+    document.querySelectorAll('.plat').forEach((a) => { const d = DOWNLOADS[a.dataset.os]; a.href = d.url; a.querySelector('.sz').textContent = d.size; a.classList.toggle('mine', a.dataset.os === os); });
+    const mine = DOWNLOADS[os];
+    const hero = document.getElementById('hero-dl');
+    hero.href = mine.url; hero.setAttribute('download', '');
+    document.getElementById('hero-dl-label').textContent = mine.label;
+    document.getElementById('hero-meta').textContent = `Free · ${mine.size} · also on ${Object.keys(DOWNLOADS).filter((k) => k !== os).map((k) => ({ mac: 'Mac', win: 'Windows', linux: 'Linux', android: 'Android' })[k]).join(', ')}`;
+    const showSteps = (k) => { document.getElementById('steps').innerHTML = STEPS[k].map((st, i) => `<div class="step"><b><i>${i + 1}</i>${st[0]}</b><p>${st[1]}</p></div>`).join(''); };
+    showSteps(os);
+    document.querySelectorAll('.plat').forEach((a) => a.addEventListener('mouseenter', () => showSteps(a.dataset.os)));
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>
